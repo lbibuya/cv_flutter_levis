@@ -39,9 +39,7 @@ La connexion locale ne constitue pas un mécanisme de sécurité et ne doit pas
 
 - Flutter installé et configuré dans le `PATH` (`flutter doctor` sans erreur
   bloquante).
-- Android Studio avec Android SDK et un émulateur, ou un appareil Android avec
-  le débogage USB activé.
-- Git pour publier le code.
+
 - GitHub CLI (`gh`) pour la méthode de création du dépôt ci-dessous, ou un
   dépôt vide créé sur GitHub.
 
@@ -124,13 +122,9 @@ les fichiers Dart, le README ni les ressources existantes.
 
 ## Captures d'écran réelles
 
-Aucune capture n'est préfabriquée ou simulée. Lancez l'application sur un
-émulateur Android ou un appareil réel, puis affichez successivement l'écran de
+les capture ont ete fait sur chrome car android studio n'as pas bien fonctionne dans mon ordinateur ,voila pourquoi je simuler l'application sur cgrome avec la commande flutter run -d chrome  puis affichez successivement l'écran de
 connexion et les onglets Accueil, Famille et Contact. Enregistrez une capture
-de chaque écran dans `screenshots/` sous les noms indiqués ci-dessous. Sur
-Windows, avec Android Debug Bridge installé, exécutez les deux commandes
-suivantes après avoir affiché chaque écran (remplacez `home` par `login`,
-`family` ou `contact` selon l'écran) :
+de chaque écran dans `screenshots/` sous les noms indiqués ci-dessous. 
 
 ```powershell
 adb shell screencap -p /sdcard/home.png
@@ -142,10 +136,14 @@ commandes de capture natives de votre appareil.
 
 | Écran | Capture |
 |---|---|
-| Connexion | ![Connexion](screenshots/login.png) |
-| Accueil | ![Accueil](screenshots/home.png) |
-| Famille | ![Famille](screenshots/family.png) |
-| Contact | ![Contact](screenshots/contact.png) |
+| Connexion | ![Connexion](<img width="630" height="987" alt="formulaire" src="https://github.com/user-attachments/assets/b8b9cdcf-a6bb-4595-8eb2-f8b1150ec250" />
+) |
+| Accueil | ![Accueil](<img width="630" height="991" alt="acceuil" src="https://github.com/user-attachments/assets/93252845-6862-4c55-bbfa-ef73b16cdc70" />
+) |
+| Famille | ![Famille](<img width="631" height="1020" alt="famille" src="https://github.com/user-attachments/assets/3b1a6054-6059-4c54-a5d1-30d6e79d7f53" />
+) |
+| Contact | ![Contact](<img width="627" height="1021" alt="contact" src="https://github.com/user-attachments/assets/afee0c3f-fffb-431e-a4e5-718298fa604f" />
+) |
 
 Ajoutez ces quatre fichiers PNG au dépôt pour qu'ils s'affichent sur GitHub.
 
