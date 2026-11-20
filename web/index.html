@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Le CV et le portfolio de Levis BIBUYA TSIBIRA.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="cv_flutter_levis">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>cv_flutter_levis</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #f6f8fc;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    #app-loading {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      justify-items: center;
+      gap: 16px;
+      padding: 24px;
+      color: #142b4a;
+      text-align: center;
+    }
+
+    #app-loading .mark {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      place-items: center;
+      border-radius: 19px;
+      background: #eaf2fd;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    #app-loading .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid #dce7f5;
+      border-top-color: #4f8fe8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    #app-loading p { margin: 0; }
+    #app-loading .hint { max-width: 360px; color: #607087; font-size: 14px; }
+    #app-loading.delayed .hint { color: #8a5b16; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      #app-loading .spinner { animation-duration: 2s; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-loading" role="status" aria-live="polite">
+    <div class="mark">L</div>
+    <div class="spinner" aria-hidden="true"></div>
+    <p><strong>Préparation de votre portfolio…</strong></p>
+    <p class="hint">Le premier démarrage Flutter peut prendre quelques instants.</p>
+  </div>
+  <script>
+    const loading = document.getElementById('app-loading');
+    const delayedHint = window.setTimeout(() => {
+      loading.classList.add('delayed');
+      loading.querySelector('.hint').textContent =
+        'Le chargement est plus long que prévu. Vérifiez le terminal Flutter et la console du navigateur (F12).';
+    }, 15000);
+
+    window.addEventListener('flutter-first-frame', () => {
+      window.clearTimeout(delayedHint);
+      loading.remove();
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
