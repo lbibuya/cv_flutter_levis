@@ -3,16 +3,8 @@
 ## Captures d'écran réelles
 
 les capture ont ete fait sur chrome car android studio n'as pas bien fonctionne dans mon ordinateur ,voila pourquoi je simuler l'application sur cgrome avec la commande flutter run -d chrome  puis affichez successivement l'écran de
-connexion et les onglets Accueil, Famille et Contact. Enregistrez une capture
-de chaque écran dans `screenshots/` sous les noms indiqués ci-dessous. 
+connexion et les onglets Accueil, Famille et Contact. 
 
-```powershell
-adb shell screencap -p /sdcard/home.png
-adb pull /sdcard/home.png screenshots\home.png
-```
-
-Vous pouvez aussi utiliser le bouton de capture d'écran de l'émulateur ou les
-commandes de capture natives de votre appareil.
 
 | Écran | Capture |
 |---|---|
