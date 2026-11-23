@@ -151,17 +151,8 @@ Vérifiez aussi dans l'application le parcours de connexion et les opérations
 ajouter/modifier/supprimer d'un membre de la famille. Les changements doivent
 être visibles dans Supabase.
 
-## Vidéo de démonstration — fichier local
+## Vidéo de démonstration
 
-La vidéo ne vient pas de YouTube. Après l'enregistrement sur le PC, place le
-fichier dans `videos/demo_tp2.mp4` :
-
-```text
-videos/
-└── demo_tp2.mp4
-```
-
-Lien vers le fichier vidéo local : [Lire la démonstration](videos/demo_tp2.mp4).
-Le lien fonctionnera depuis ce README si le fichier est présent à cet
-emplacement. Pour que le lien soit aussi disponible sur GitHub, ajoute le MP4
-au dépôt; sinon, conserve la vidéo sur le PC pour la remise du travail.
+| Vidéo | Démonstration |
+|---|---|
+| TP2 | <video width="627" controls><source src="LIEN_VIDEO_A_REMPLACER.mp4" type="video/mp4">La vidéo n'est pas prise en charge par ce navigateur.</video> |
