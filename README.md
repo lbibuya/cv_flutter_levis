@@ -153,6 +153,8 @@ ajouter/modifier/supprimer d'un membre de la famille. Les changements doivent
 
 ## Vidéo de démonstration
 
-| Vidéo | Démonstration |
-|---|---|
-| TP2 | <video width="627" controls><source src="assets/video/demonstration" type="video/demonstration"> videos </video> |
+La prévisualisation intégrée des fichiers vidéo n'est pas prise en charge dans
+ce README GitHub. Utilise le lien ci-dessous pour ouvrir ou télécharger la
+vidéo :
+
+[Ouvrir ou télécharger la vidéo de démonstration TP2](https://raw.githubusercontent.com/lbibuya/cv_flutter_levis/main/assets/video/demonstration.webm)
