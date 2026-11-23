@@ -5,6 +5,10 @@
 /.packages
 build/
 coverage/
+__pycache__/
+*.py[cod]
+backend/.env
+backend/.venv/
 
 # Android
 android/.gradle/

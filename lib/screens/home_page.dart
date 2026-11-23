@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../services/app_api.dart';
 import '../theme/app_theme.dart';
 import '../widgets/custom_card.dart';
 import '../widgets/navigation_bar.dart';
 import 'contact_page.dart';
 import 'cv_page.dart';
 import 'family_page.dart';
-import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    required this.api,
+    required this.onLogout,
+    super.key,
+  });
+
+  final AppApi api;
+  final VoidCallback onLogout;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,18 +27,6 @@ class _HomePageState extends State<HomePage> {
 
   static const _titles = ['Accueil', 'Mon CV', 'Ma famille', 'Me contacter'];
 
-  void _logout() {
-    Navigator.of(context).pushAndRemoveUntil(
-      PageRouteBuilder<void>(
-        pageBuilder: (_, __, ___) => const LoginPage(),
-        transitionsBuilder: (_, animation, __, child) =>
-            FadeTransition(opacity: animation, child: child),
-        transitionDuration: const Duration(milliseconds: 250),
-      ),
-      (_) => false,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final pages = [
@@ -39,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         onNavigate: (index) => setState(() => _selectedIndex = index),
       ),
       const CvPage(),
-      const FamilyPage(),
+      FamilyPage(api: widget.api),
       const ContactPage(),
     ];
 
@@ -49,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             tooltip: 'Se déconnecter',
-            onPressed: _logout,
+            onPressed: widget.onLogout,
             icon: const Icon(Icons.logout_rounded),
           ),
           const SizedBox(width: 8),

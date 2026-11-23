@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../services/app_api.dart';
 import '../theme/app_theme.dart';
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({
+    required this.api,
+    required this.onLoginSuccess,
+    super.key,
+  });
+
+  final AppApi api;
+  final VoidCallback onLoginSuccess;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -12,41 +19,45 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+  bool _isSigningIn = false;
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
-  void _signIn() {
+  Future<void> _signIn() async {
     if (!_formKey.currentState!.validate()) return;
 
-    if (_usernameController.text.trim() == 'levis' &&
-        _passwordController.text == '123456') {
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder<void>(
-          pageBuilder: (_, __, ___) => const HomePage(),
-          transitionsBuilder: (_, animation, __, child) =>
-              FadeTransition(opacity: animation, child: child),
-          transitionDuration: const Duration(milliseconds: 280),
-        ),
+    setState(() => _isSigningIn = true);
+    try {
+      await widget.api.login(
+        _emailController.text.trim(),
+        _passwordController.text,
       );
-      return;
+      if (mounted) widget.onLoginSuccess();
+    } on AppApiException catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              error.statusCode == 401
+                  ? 'Identifiants incorrects - Vérifiés par le serveur'
+                  : error.message,
+            ),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+    } finally {
+      if (mounted) setState(() => _isSigningIn = false);
     }
-
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(
-          content: Text('Identifiant ou mot de passe incorrect.'),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
   }
 
   @override
@@ -127,11 +138,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 26),
               TextFormField(
-                controller: _usernameController,
+                controller: _emailController,
                 textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  labelText: 'Identifiant',
-                  prefixIcon: Icon(Icons.person_outline_rounded),
+                  labelText: 'Adresse e-mail',
+                  prefixIcon: Icon(Icons.email_outlined),
                 ),
                 validator: (value) => value == null || value.trim().isEmpty
                     ? 'Veuillez saisir votre identifiant.'
@@ -167,9 +179,17 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 54,
                 child: FilledButton.icon(
-                  onPressed: _signIn,
-                  icon: const Icon(Icons.arrow_forward_rounded),
-                  label: const Text('Découvrir mon CV'),
+                  onPressed: _isSigningIn ? null : _signIn,
+                  icon: _isSigningIn
+                      ? const SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.arrow_forward_rounded),
+                  label: Text(
+                    _isSigningIn ? 'Connexion…' : 'Découvrir mon CV',
+                  ),
                 ),
               ),
               const SizedBox(height: 18),
@@ -180,29 +200,20 @@ class _LoginPageState extends State<LoginPage> {
                   color: AppTheme.paleBlue,
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: const Column(
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.info_outline_rounded,
-                            size: 18, color: AppTheme.navy),
-                        SizedBox(width: 8),
-                        Text(
-                          'Identifiant : levis',
-                          style: TextStyle(
-                            color: AppTheme.navy,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    Icon(Icons.verified_user_outlined,
+                        size: 18, color: AppTheme.navy),
+                    SizedBox(width: 8),
+                    Flexible(
+                      child: Text(
+                        'Vos identifiants sont vérifiés par le serveur.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppTheme.navy,
+                          fontWeight: FontWeight.w600,
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Mot de passe : 123456',
-                      style: TextStyle(
-                        color: AppTheme.navy,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
