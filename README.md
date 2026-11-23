@@ -82,7 +82,7 @@ videos/
 └── demo_tp2.mp4
 ```
 
-Lien vers le fichier vidéo local : [Lire la démonstration](videos/demo_tp2.mp4).
+Lien vers le fichier vidéo local : [Lire la démonstration](videos/demonstration).
 Le lien fonctionnera depuis ce README si le fichier est présent à cet
 emplacement. Pour que le lien soit aussi disponible sur GitHub, ajoute le MP4
 au dépôt; sinon, conserve la vidéo sur le PC pour la remise du travail.
